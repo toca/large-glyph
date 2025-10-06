@@ -77,6 +77,14 @@ int main(int argc, char** argv)
 	::setlocale(LC_ALL, ".UTF8"); // Set locale to the user's default locale
 	::SetConsoleOutputCP(65001);
 
+
+    HANDLE outputHandle = ::GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD mode = 0;
+    ::GetConsoleMode(outputHandle, &mode);
+    mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    SetConsoleMode(outputHandle, mode);
+
+
     std::string input = "";
     int fg = 0, bg = 0;
     // コマンドライン引数のパース
